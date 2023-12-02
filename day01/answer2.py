@@ -1,5 +1,5 @@
-f = open("./dum.txt", "r")
-
+f = open("./puzzle.txt", "r")
+iter = 1
 sum = 0
 
 # dictionary of numbers in words
@@ -12,36 +12,38 @@ for x in f:
     
     # checks if there are digits and adds to dict
     for a, y in enumerate(x):
-        print(a, " ", y, " ", y.isalpha())
         if y.isalpha() or y == "\n":
             pass
         else:
-            print("y")
-            temp[y] = a
-            print("temp: ", temp[y])
-
+            k = y + str(a)
+            temp[k] = [int(y)]
+            temp[k] += [a]
+            
     #checks if there are sub string numbers and adds to dict
     for u in numbers:
         if x.find(u) != -1:
-            temp[str(numbers[u])] = x.find(u)
+            val = numbers[u]
+            pos = x.find(u)
+            k =  str(val) + str(pos)
+            temp[k] = [val]
+            temp[k] += [pos]
     
     # sorts the dict by their positions
-    sortedtemp = sorted(temp.items(), key=lambda x:x[1])
-    print(sortedtemp)
+    sortedtemp = sorted(temp.items(), key=lambda x:x[1][1])
 
     # combine the first and last digit to form a two-digit number
-    z = sortedtemp[0][0] + sortedtemp[-1][0]
+    z = str(sortedtemp[0][1][0]) + str(sortedtemp[-1][1][0])
     
-    print(z)
-    
-    # adds to the sum
     sum += int(z)
-    
+
+    print(iter, int(z), sum)
+
+    # adds to the sum
+    iter +=1
+
 
 print(f"Sum of all calibratiion values: {sum}")
 
-# 4vzpsdreight337hgvq
-# jone4ccn8
-# nftdkmtmcz4
-# nlnineeightmndkqz8nineonenrqm
-# nrhdxfsqvxcbcghf35eightthreeseven5
+
+
+# answer = 54203
